@@ -17,7 +17,7 @@
   .aui-row .menus{margin-bottom: 25px;text-align: center;background: #ff7e00;color:#fff;border-radius: 50%;margin-right: 18px;float:left;padding:12px}
   .aui-row .menus:active{color:#666;background: #fff}
   .arrow_left{background: none;color:#fff}
-  .aui-list-item{border-bottom: 2px solid #111;font-size: 16px;height: 25px;padding-top: 15px;padding-bottom: 15px}
+  .aui-list-item{border-bottom: 2px solid #111;font-size: 18px;height: 25px;padding-top: 15px;padding-bottom: 15px}
   .aui-list-item:nth-child(odd){background:#f5f5f5;}
 
 
@@ -88,6 +88,7 @@
                     name: 'login'
                 }
             });
+            location.reload();
           }else if(ret.code == '1'){
               //关闭win的时候写入id
               $api.setStorage('close_id',api.pageParam.entry_id);

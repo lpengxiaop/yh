@@ -12,12 +12,15 @@
   #wrap{position: fixed;top:0;right: 0;height: 100%;width:100%;background: url('../image/bg.png') no-repeat;background-size: cover;}
   #header{height: 70px;background: rgba(19,91,172,0.8);opacity: 1;padding-top: 0px;text-align: center;color: #fff;margin-top: -25px}
   #header h1{font-size: 26px}
-  #main{background: none;padding-top: 20px;height: 100%}
+  #main{background: none;padding-top: 10px;height: 100%}
   .aui-grid{width: 100%;margin: 0 auto;text-align: center;background:none}
   .aui-row .menus{margin-bottom: 25px;text-align: center;background: -webkit-linear-gradient(top,#d47518,#ff7e00);color:#fff;border-radius:15px;margin-right: 10px;margin-left:10px;
     float:left;padding:5px 20px 10px 20px;box-shadow: 1px 3px 2px #000;}
   .aui-row .menus:active{color:#666;background: #fff}
   .arrow_left{background: none;color:#fff}
+  .aui-title{font-size: 30px}
+  .kf{width: 80px;text-align: center;margin: 15px auto}
+  .kf img{width: 100%;}
 
 	</style>
 </head>
@@ -35,6 +38,11 @@
 
 
       <div id="main" class="flex-con" >
+
+
+        <div class="kf" tapmode onclick="open_yuyin();"><img src="../image/icon_kf.png"></div>
+
+        <div>
           <section class="aui-grid" >
             <div class="aui-row" id="menu_list">
 
@@ -116,16 +124,24 @@
       for (var i = 0; i < data_json.length; i++) {
             var title = data_json[i].title;
             var id = data_json[i].id;
-            var title = $api.setStorage('x_title',data_json[i].title);
-            html +='<div class="menus" title='+title+' id='+id+' tapmode onclick="open_json('+id+');"><div class="aui-grid-label" >'+data_json[i].title+'</div></div>';
+            var title = $api.setStorage('x_title',title);
+            
+            html +='<div class="menus" title='+data_json[i].title+' id='+data_json[i].id+' tapmode onclick="open_json(this);"><div class="aui-grid-label" >'+data_json[i].title+'</div></div>';
           //打开详情页面
-          $api.html($api.byId('menu_list'),html);
+
+
       }
+        $api.html($api.byId('menu_list'),html);
 }
 
-    function open_json(id){
+    function open_json(obj){
+
+      var title = $api.attr(obj,'title');
+      var id = $api.attr(obj,'id');
+
       var menus_h = $api.offset($api.dom('.menus')).h;
-      var x_title = $api.getStorage('x_title');
+      alert(title);
+
       api.openWin({
           name: 'x_frm',
           url: './x_frm.html',
@@ -140,10 +156,25 @@
           pageParam: {
               name: 'x_frm',
               x_id: id,
-              x_title:x_title
+              x_title:title
           }
       })
     }
+
+    function open_yuyin(){
+
+      api.openWin({
+          name: 'yuyin_win',
+          url: './yuyin_win.html',
+
+          bgColor: '#666',
+          pageParam: {
+              name: 'yuyin_win',
+          }
+      })
+
+    }
+
     function win_close(){
       api.closeWin();
     }

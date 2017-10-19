@@ -152,21 +152,22 @@
 
         }, function(ret, err) {
             if (ret) {
-                api.alert({ msg: JSON.stringify(ret) });
+
                 console.log(JSON.stringify(ret));
                 if(ret.data.token){
                   $api.setStorage('token',ret.data.token);   //存储token
                   $api.setStorage('name',$('#name').val());
                   $api.setStorage('password',$('#pass').val());
+                  $api.setStorage('nickname',ret.data.nickname);
 
 
-                    // api.openWin({
-                    //     name: 'main',
-                    //     url: './html/main.html',
-                    //     pageParam: {
-                    //         name: 'main'
-                    //     }
-                    // });
+                    api.openWin({
+                        name: 'main',
+                        url: './html/main.html',
+                        pageParam: {
+                            name: 'main'
+                        }
+                    });
                 }else{
                   alert('不匹配');
                 }
